@@ -30,9 +30,9 @@ public:
    }
    void print()
    {
-      for(int i = 0; i < newNumber.size(); i++)
+      for(int i = 0; i < number.size(); i++)
       {
-         cout << newNumber[i];
+         cout << number[i];
       }
       cout << endl;
    }
@@ -44,6 +44,13 @@ public:
 
       int n1 = a.number.size();
       int n2 = b.number.size();
+
+      if(n1 > n2)
+      {
+         a.number.swap(b.number);
+         n1 = a.number.size();
+         n2 = b.number.size();
+      }
 
       vector<int> newNumber2;
 
@@ -67,14 +74,10 @@ public:
       if (carry)
          newNumber2.push_back(carry);
 
-      // reverse resultant string
       reverse(newNumber2.begin(), newNumber2.end());
 
-      for(int i = 0; i < newNumber2.size(); i++)
-      {
-         cout << newNumber2[i];
-      }
-      cout << endl;
+      a.number.swap(newNumber2);
+
    }
 
    friend void operator -(BigNumber &a, BigNumber& b)
@@ -128,11 +131,7 @@ public:
 
       reverse(newNumber2.begin(), newNumber2.end());
 
-      for(int i = 0; i < newNumber2.size(); i++)
-      {
-         cout << newNumber2[i];
-      }
-      cout << endl;
+      a.number.swap(newNumber2);
    }
 
    friend void operator *(BigNumber &a, BigNumber& b)
@@ -178,18 +177,27 @@ public:
 
       reverse(result.begin(), result.end());
 
+      a.number.swap(result);
 
-      for(int i = 1; i < result.size(); i++)
-      {
-         cout << result[i];
-      }
-      cout << endl;
    }
 
-   friend void operator /(BigNumber &a, BigNumber& b)
+   /*BigNumber operator /(BigNumber other)
    {
+      BigNumber q, r;
+      q.a.resize(a.a.size());
 
-   }
+      for (int i = a.a.size() - 1; i >= 0; i--) {
+          r *= base;
+          r += a.a[i];
+          int s1 = r.a.size() <= b.a.size() ? 0 : r.a[b.a.size()];
+          int s2 = r.a.size() <= b.a.size() - 1 ? 0 : r.a[b.a.size() - 1];
+          int d = ((long long) base * s1 + s2) / b.a.back();
+          r -= b * d;
+          while (r < 0)
+             r += b, --d;
+          q.a[i] = d;
+      }
+   }*/
 
    friend void operator %(BigNumber &a, int b)
    {
