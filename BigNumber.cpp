@@ -205,15 +205,3 @@ public:
 
 
 };
-
-int main()
-{
-   BigNumber d("30899");
-   BigNumber e("5");
-
-   //d + e;
-
-   d % 5;
-
-   return 0;
-}
